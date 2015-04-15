@@ -1,0 +1,7 @@
+Name Grades
+Simon 4
+Anna 10
+Simon 4
+Anna 5
+Anna 9
+Edward 10
