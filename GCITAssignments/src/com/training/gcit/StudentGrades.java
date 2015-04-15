@@ -25,7 +25,7 @@ public class StudentGrades {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) {	
 		List<String> line = new ArrayList<String>();
 		BufferedReader inputStream = null;
 		try {
@@ -52,27 +52,45 @@ public class StudentGrades {
 
 		//sort list into alphabetical order
 		Collections.sort(line, String.CASE_INSENSITIVE_ORDER);		
-
+		
 		Iterator<String> iter = line.iterator();
-/*
-		Map<String, Integer> map = new HashMap<String, Integer>();
-
-		while (iter.hasNext()) {
-			String word = iter.next().toLowerCase();
-			if (map.containsKey(word)) {
-				map.put(word, map.get(word) + 1);
-			}
-			else {
-				map.put(word, 0);
-			}
-		}
-		System.out.println(map);*/
-
+		
 		System.out.println("Alpha Order");
 		while (iter.hasNext()) {
 			Object element = iter.next();
 			System.out.println(element);
 		}
+
+		/*Map<String, Integer> map = new HashMap<String, Integer>();
+
+		while (iter.hasNext()) {
+			String word = iter.next().toLowerCase();
+			if (word.contains(" ")) {
+				String[] parts = word.split(" ");
+				map.put(parts[0], Integer.parseInt(parts[1]));
+			}
+		}*/
+		
+		/*TreeMap<String, Integer> freq = new TreeMap<String, Integer>();
+		Scanner in = null;
+		String word;
+		int count = 0;
+		try {
+			in = new Scanner(new FileReader("studentGrades.txt"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		while (in.hasNext()) {
+			word = in.next();
+			if (freq.containsKey(word)) {
+				freq.get(word);
+				count++;
+			}
+			freq.put(word, count);
+			for (String w : freq.keySet()) {
+				System.out.println(word);
+			}
+		}*/
 	}
 
 }
