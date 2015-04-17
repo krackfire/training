@@ -11,10 +11,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
+
 
 
 /**
@@ -23,75 +26,76 @@ import java.util.Map;
  */
 public class StudentGrades {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {	
-		List<String> line = new ArrayList<String>();
-		BufferedReader inputStream = null;
-		try {
-			inputStream = new BufferedReader(
-					new FileReader("studentGrades.txt"));
-			String str;
-			inputStream.readLine(); //removes header from output by reading it first
-			while ((str = inputStream.readLine()) != null) {
-				line.add(str);
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (inputStream != null) {
-				try {
-					inputStream.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
+	public static int getAverage() {
+		Map<String, Student> map = new HashMap<String, Student>();
+		int total = 0;
+		for (String word : map.keySet()){
+			total += map.get(word).getGrades() / map.get(word).getNum();
 		}
-
-		//sort list into alphabetical order
-		Collections.sort(line, String.CASE_INSENSITIVE_ORDER);		
-		
-		Iterator<String> iter = line.iterator();
-		
-		System.out.println("Alpha Order");
-		while (iter.hasNext()) {
-			Object element = iter.next();
-			System.out.println(element);
-		}
-
-		/*Map<String, Integer> map = new HashMap<String, Integer>();
-
-		while (iter.hasNext()) {
-			String word = iter.next().toLowerCase();
-			if (word.contains(" ")) {
-				String[] parts = word.split(" ");
-				map.put(parts[0], Integer.parseInt(parts[1]));
-			}
-		}*/
-		
-		/*TreeMap<String, Integer> freq = new TreeMap<String, Integer>();
-		Scanner in = null;
-		String word;
-		int count = 0;
-		try {
-			in = new Scanner(new FileReader("studentGrades.txt"));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		while (in.hasNext()) {
-			word = in.next();
-			if (freq.containsKey(word)) {
-				freq.get(word);
-				count++;
-			}
-			freq.put(word, count);
-			for (String w : freq.keySet()) {
-				System.out.println(word);
-			}
-		}*/
+		int val = total/map.keySet().size();
+		return val;
 	}
 
+	public static void main(String[] args) throws IOException {	
+		Map<String, Student> map = new TreeMap<String, Student>();
+
+		String str;
+		String[] key;
+		BufferedReader inputStream = null;
+
+		try {
+			inputStream = new BufferedReader(new FileReader("studentGrades.txt"));
+			inputStream.readLine();
+
+			while ((str = inputStream.readLine()) != null) {
+				key = str.split(" ");
+				Student student = new Student();
+				//check if map has key
+				if (map.containsKey(key[0])) {
+					//associate the key[name] with a grade(make sure its an integer)
+					student.setGrades(map.get(key[0]).getGrades() + Integer.parseInt(key[1]));
+					//number of times a name exits in file
+					student.setNum(map.get(key[0]).getNum() + 1); 
+					map.put(key[0], student); // associate specified value with specified key
+				}
+				else {
+					student.setGrades(Integer.parseInt(key[1]));
+					student.setNum(1);
+					map.put(key[0], student);
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} 
+		inputStream.close();
+
+		System.out.println("Alpha Order");
+		for (String word : map.keySet()) {
+			System.out.println(word + " " + map.get(word).getNum() + " " 
+					+ (double) map.get(word).getGrades()
+					/ map.get(word).getNum());
+		}
+		
+		Comparator<Map.Entry<String, Student>> entriesSortedByValues = new Comparator<Map.Entry<String, Student>>()  {
+			@Override 
+			public int compare(Map.Entry<String, Student> e1, Map.Entry<String, Student> e2) {
+				return (e2.getValue().getGrades() / e2.getValue().getNum())
+						- (e1.getValue().getGrades() / e1.getValue().getNum());
+			}
+		};
+		ArrayList<Map.Entry<String, Student>> list = new ArrayList<Map.Entry<String, Student>>();
+		list.addAll(map.entrySet());
+		Collections.sort(list, entriesSortedByValues);
+		
+		System.out.println();
+		System.out.println("Merit Order");
+		for (Entry<String, Student> st : list) {
+			System.out.println(st.getKey() + " " + st.getValue().getNum()
+					+ " " + (double) st.getValue().getGrades()
+					/ st.getValue().getNum());
+		}
+		int average = getAverage();
+		System.out.println("Average student mark is: " + average);
+	}
 }
+
