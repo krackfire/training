@@ -47,6 +47,7 @@ public class BookDAOImpl implements Serializable, com.gcit.training.lws.daointer
 		while(resultset.next()) {
 			Book b = new Book();
 			b.setBookId(resultset.getInt("bookId"));
+			b.setPubId(resultset.getInt("pubId"));
 			b.setTitle(resultset.getString("title"));
 			books.add(b);
 		}

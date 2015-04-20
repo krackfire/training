@@ -33,14 +33,15 @@ public class BookDAOTest {
 		
 		b.setBookId(b.getBookId());
 		b.setTitle(b.getTitle());
-		books.add(b);
 		
-		Iterator<Book> it = books.iterator();
-		while(it.hasNext()) {
-			System.out.println(it.next());
-		}
 		try {
-			new BookDAOImpl().getAllBooks();
+			BookDAOImpl bookdao = new BookDAOImpl();
+			books = bookdao.getAllBooks();
+			
+			Iterator<Book> it = books.iterator();
+			while(it.hasNext()) {
+				System.out.println(it.next());
+			}
 		} catch (SQLException e) {
 			fail(e.getMessage());
 		}
@@ -50,50 +51,50 @@ public class BookDAOTest {
 	/**
 	 * Test method for {@link com.gcit.training.lws.dao.BookDAOImpl#addBook(com.gcit.training.lws.domain.Book)}.
 	 */
-	@Test
-	public void testAddBook() {
-		Book book = new Book();
-		book.setTitle("Romanian beginnings");
-		book.setPubId(11);
-		try {
-			new BookDAOImpl().addBook(book);
-		} catch(Exception e) {
-			fail(e.getMessage());
-		}
-	}
-
-	/**
-	 * Test method for {@link com.gcit.training.lws.dao.BookDAOImpl#updateBook(com.gcit.training.lws.domain.Book)}.
-	 */
-	@Test
-	public void testUpdateBook() {
-		
-		Book b = new Book();
-		
-		b.setBookId(25);
-		b.setTitle("The Rise and Fall of Wall Street");
-		b.setPubId(4);
-		try {
-			new BookDAOImpl().updateBook(b);
-		} catch (SQLException e) {
-			fail(e.getMessage());
-		}
-	}
-
-	/**
-	 * Test method for {@link com.gcit.training.lws.dao.BookDAOImpl#deleteBook(com.gcit.training.lws.domain.Book)}.
-	 */
-	@Test
-	public void testDeleteBook() {
-		
-		Book b = new Book();
-		
-		b.setBookId(34);
-		try {
-			new BookDAOImpl().deleteBook(b);
-		} catch (SQLException e) {
-			fail(e.getMessage());
-		}
-	}
+//	@Test
+//	public void testAddBook() {
+//		Book book = new Book();
+//		book.setTitle("Romanian beginnings");
+//		book.setPubId(11);
+//		try {
+//			new BookDAOImpl().addBook(book);
+//		} catch(Exception e) {
+//			fail(e.getMessage());
+//		}
+//	}
+//
+//	/**
+//	 * Test method for {@link com.gcit.training.lws.dao.BookDAOImpl#updateBook(com.gcit.training.lws.domain.Book)}.
+//	 */
+//	@Test
+//	public void testUpdateBook() {
+//		
+//		Book b = new Book();
+//		
+//		b.setBookId(25);
+//		b.setTitle("The Rise and Fall of Wall Street");
+//		b.setPubId(4);
+//		try {
+//			new BookDAOImpl().updateBook(b);
+//		} catch (SQLException e) {
+//			fail(e.getMessage());
+//		}
+//	}
+//
+//	/**
+//	 * Test method for {@link com.gcit.training.lws.dao.BookDAOImpl#deleteBook(com.gcit.training.lws.domain.Book)}.
+//	 */
+//	@Test
+//	public void testDeleteBook() {
+//		
+//		Book b = new Book();
+//		
+//		b.setBookId(34);
+//		try {
+//			new BookDAOImpl().deleteBook(b);
+//		} catch (SQLException e) {
+//			fail(e.getMessage());
+//		}
+//	}
 
 }

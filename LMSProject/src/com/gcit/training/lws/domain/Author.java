@@ -5,6 +5,15 @@ import java.util.List;
 
 public class Author {
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Author [authorId=" + authorId + ", authorName=" + authorName
+				+ ", books=" + books + "]";
+	}
+
 	private int authorId;
 
 	private String authorName;

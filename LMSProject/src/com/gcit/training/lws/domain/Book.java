@@ -3,6 +3,15 @@ package com.gcit.training.lws.domain;
 import java.util.List;
 
 public class Book {
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Book [bookId=" + bookId + ", pubId=" + pubId + ", title="
+				+ title + ", authors=" + authors + "]";
+	}
+
 	private int bookId;
 	
 	private int pubId;

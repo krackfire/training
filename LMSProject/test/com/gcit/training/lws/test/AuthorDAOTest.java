@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Test;
@@ -57,12 +58,14 @@ public class AuthorDAOTest {
 		List<Author> authors = new ArrayList<Author>();
 		a.getAuthorId();
 		a.getAuthorName();
-		authors.add(a);
 
 		try {
-			AuthorDAO authdao= new AuthorDAO();
-			authdao.readAll();
-			System.out.println(authdao);
+			AuthorDAO auth = new AuthorDAO();
+			authors = auth.readAll();
+			Iterator<Author> it = authors.iterator();
+			while(it.hasNext()) {
+				System.out.println(it.next());
+			}
 		} catch (SQLException e) {
 			fail(e.getMessage());
 		}
