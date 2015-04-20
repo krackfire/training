@@ -66,6 +66,7 @@ public class WordCounter
           count = getCount(word, frequencyData) + 1;
           frequencyData.put(word, count);
       }
+      wordFile.close();
    } 
 
 }

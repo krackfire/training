@@ -74,6 +74,7 @@ public class GettingEven {
 			engine.displayWinner();
 		}
 		while (engine.playAgain());
+		response.close();
 	}
 
 }

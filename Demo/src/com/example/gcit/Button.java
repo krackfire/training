@@ -7,15 +7,23 @@ import java.util.Scanner;
  * 
 */
 public class Button extends Widget {
-	
+
+	/* (non-Javadoc)
+	 * @see com.example.gcit.Widget#doAction()
+	 */
 	@Override
 	public void doAction() {
-		ArrayList<String> list = new ArrayList<String>(1);
-		Scanner scanner = new Scanner(System.in);
-		while(true){
-			list.add(scanner.next());
-			System.out.println(list);
-		}
+		// TODO Auto-generated method stub
+		
 	}
-
+	
+//	@Override
+//	public void doAction() {
+//		ArrayList<String> list = new ArrayList<String>(1);
+//		Scanner scanner = new Scanner(System.in);
+//		while(true){
+//			list.add(scanner.next());
+//			System.out.println(list);
+//		}
+//	}
 }

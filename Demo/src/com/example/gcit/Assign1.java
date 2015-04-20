@@ -32,6 +32,6 @@ public class Assign1 {
 			}
 			System.out.println("Sorry! You have no more tries.");
 		}
-
+		input.close();
 	}
 }

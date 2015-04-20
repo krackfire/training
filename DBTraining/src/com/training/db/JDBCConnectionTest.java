@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -35,8 +36,9 @@ public class JDBCConnectionTest {
 			String authorInsert = "INSERT INTO tbl_author (authorId, authorName) VALUES (?, ?)";
 			String bookInsert = "INSERT INTO tbl_book (bookId, "+ "title, pubId) VALUES (?, ?, ?)";
 			PreparedStatement pubInsertPstmt = conn.prepareStatement(pubInsert);
+			
 
-			String publishers = "select * from  tbl_publisher";
+			List<Publisher> publishers = new ArrayList<Publisher>();
 			for (Publisher pub : publishers) {
 				pubInsertPstmt.setInt(1, pub.publisherId);
 				pubInsertPstmt.setString(2, pub.getPublisherName());
@@ -146,6 +148,7 @@ public class JDBCConnectionTest {
 				System.out.println("Invalid input: " + str);
 				in.next();
 			}
+			in.close();
 
 
 
